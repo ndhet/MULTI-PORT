@@ -238,10 +238,10 @@ echo -e "  ${COLOR1}[03]${NC} • VLESS   [${YELLOW}${status_xray}${NC}]   ${COL
 echo -e "  ${COLOR1}[04]${NC} • TROJAN  [${YELLOW}${status_xray}${NC}]   ${COLOR1}[10]${NC} • RENEW CERT       $COLOR1 $NC"  
 echo -e "  ${COLOR1}[05]${NC} • SS WS   [${YELLOW}ON${NC}]   ${COLOR1}[11]${NC} • SETTINGS [${YELLOW}Menu${NC}]  $COLOR1 $NC"
 echo -e "  ${COLOR1}[06]${NC} • SET DNS [${YELLOW}Menu${NC}] ${COLOR1}[12]${NC} • INFO     [${YELLOW}Menu${NC}]  $COLOR1 $NC"
+echo -e "$COLOR1└──────────────────────MENU ADMIN─────────────────────┘${NC}"
 if [ "$Isadmin" = "ON" ]; then
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "  ${COLOR1}[IP]${NC} • REG IP  [${YELLOW}Menu${NC}] ${COLOR1}[BOT]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1 $NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e "  ${COLOR1}[0]${NC} • EXIT "
 ressee="menu-ip"
 bottt="menu-bot"
