@@ -153,6 +153,49 @@ read -n 1 -s -r -p "  Press any key to back on menu"
 menu
 }
 clear
+# Getting CPU Information
+vnstat_profile=$(vnstat | sed -n '3p' | awk '{print $1}' | grep -o '[^:]*')
+vnstat -i ${vnstat_profile} >/root/t1
+bulan=$(date +%b)
+today=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $8}')
+todayd=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $8}')
+today_v=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $9}')
+today_rx=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $2}')
+today_rxv=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $3}')
+today_tx=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $5}')
+today_txv=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $6}')
+if [ "$(grep -wc ${bulan} /root/t1)" != '0' ]; then
+    bulan=$(date +%b)
+    month=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $9}')
+    month_v=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $10}')
+    month_rx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $3}')
+    month_rxv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $4}')
+    month_tx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $6}')
+    month_txv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $7}')
+else
+    bulan=$(date +%Y-%m)
+    month=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $8}')
+    month_v=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $9}')
+    month_rx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $2}')
+    month_rxv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $3}')
+    month_tx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $5}')
+    month_txv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $6}')
+fi
+if [ "$(grep -wc yesterday /root/t1)" != '0' ]; then
+    yesterday=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $8}')
+    yesterday_v=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $9}')
+    yesterday_rx=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $2}')
+    yesterday_rxv=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $3}')
+    yesterday_tx=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $5}')
+    yesterday_txv=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $6}')
+else
+    yesterday=NULL
+    yesterday_v=NULL
+    yesterday_rx=NULL
+    yesterday_rxv=NULL
+    yesterday_tx=NULL
+    yesterday_txv=NULL
+fi
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1 ${NC} ${COLBG1}               • VPS PANEL MENU •              ${NC} $COLOR1 $NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
@@ -183,6 +226,12 @@ echo -e "$COLOR1┌────────────────────�
 echo -e "$COLOR1 $NC [ SSH WS : ${status_ws} ]  [ XRAY : ${status_xray} ]   [ NGINX : ${status_nginx} ] $COLOR1 $NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1 Traffic${NC}      Today       Yesterday       Month   "
+echo -e "$COLOR1 Download${NC}   $today_tx   $today_txv      $yesterday_tx $yesterday_txv      $month_tx $month_txv   \e[0m"
+echo -e "$COLOR1 Upload${NC}     $today_rx $today_rxv        $yesterday_rx $yesterday_rxv      $month_rx $month_rxv   \e[0m"
+echo -e "$COLOR1 Total${NC}    $todayd     $today_v            $yesterday $yesterday_v      $month $month_v  \e[0m "
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "  ${COLOR1}[01]${NC} • SSHWS   [${YELLOW}${status_ws}${NC}]   ${COLOR1}[07]${NC} • THEME    [${YELLOW}Menu${NC}]  $COLOR1 $NC"   
 echo -e "  ${COLOR1}[02]${NC} • VMESS   [${YELLOW}${status_xray}${NC}]   ${COLOR1}[08]${NC} • BACKUP   [${YELLOW}Menu${NC}]  $COLOR1 $NC"  
 echo -e "  ${COLOR1}[03]${NC} • VLESS   [${YELLOW}${status_xray}${NC}]   ${COLOR1}[09]${NC} • ADD HOST/DOMAIN  $COLOR1 $NC"  
@@ -191,7 +240,7 @@ echo -e "  ${COLOR1}[05]${NC} • SS WS   [${YELLOW}ON${NC}]   ${COLOR1}[11]${NC
 echo -e "  ${COLOR1}[06]${NC} • SET DNS [${YELLOW}Menu${NC}] ${COLOR1}[12]${NC} • INFO     [${YELLOW}Menu${NC}]  $COLOR1 $NC"
 if [ "$Isadmin" = "ON" ]; then
 echo -e "  ${COLOR1}[13]${NC} • REG IP  [${YELLOW}Menu${NC}] ${COLOR1}[14]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1 $NC"
-echo -e "  ${COLOR1}[13]${NC} • EXIT "
+echo -e "  ${COLOR1}[15]${NC} • EXIT "
 ressee="menu-ip"
 bottt="menu-bot"
 else

@@ -17,7 +17,7 @@ echo -e "$COLOR1 ${NC} ${COLBG1}               • SSH PANEL MENU •           
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 read -p "   Username : " Login
-read -p "   Owner : " OWNER
+OWNER="WEBSSH"
 CEKFILE=/etc/xray/ssh.txt
 if [ -f "$CEKFILE" ]; then
 file001="OK"
@@ -60,7 +60,7 @@ echo ""
 read -n 1 -s -r -p "   Press any key to back on menu"
 menu-ssh
 fi
-read -p "   Expired (hari): " masaaktif
+read -p "   Expired : " masaaktif
 if [ -z $masaaktif ]; then
 echo -e "$COLOR1 ${NC}  [Error] EXP Date cannot be empty "
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
