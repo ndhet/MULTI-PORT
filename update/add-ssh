@@ -207,5 +207,5 @@ echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COL
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
 fi
 echo -e ""
-read -n 1 -s -r -p "  Press any key to back on menu"
-menu-ssh
+#read -n 1 -s -r -p "  Press any key to back on menu"
+#menu-ssh
