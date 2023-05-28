@@ -242,7 +242,7 @@ echo -e "$COLOR1└────────────────────�
 if [ "$Isadmin" = "ON" ]; then
 echo -e "$COLOR1┌────────────────── MENU ADMIN ───────────────────┐${NC}"
 echo -e "  ${COLOR1}[IP]${NC} • REG IP  [${YELLOW}Menu${NC}] ${COLOR1}[BOT]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1 $NC"
-echo -e "  ${COLOR1}[0]${NC} • EXIT "
+echo -e "  ${COLOR1}[00]${NC} • EXIT "
 ressee="menu-ip"
 bottt="menu-bot"
 else

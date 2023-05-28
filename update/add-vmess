@@ -1,0 +1,295 @@
+#!/bin/bash
+###########- BOT TELE ################
+AKUN="AKUN VMESS"
+TIMES="10"
+CHATID="5627481033"
+CHATIDGC="-1001971246553"
+KEY="5684804886:AAFup0F9eqNPL7yIUUmTPE5is2SaAIYZixQ"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+##################### END BOT TELE ###############
+clear
+source /var/lib/alexxa-pro/ipvps.conf
+domain=$(cat /etc/xray/domain)
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC} ${COLBG1}            • CREATE VMESS USER •              ${NC} $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
+none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
+
+read -rp "   Input Username : " -e user
+OWNER="WEBSSH"
+      
+if [ -z $user ]; then
+echo -e "$COLOR1 ${NC} [Error] Username cannot be empty "
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo ""
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu
+fi
+		CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+
+		if [[ ${CLIENT_EXISTS} == '1' ]]; then
+clear
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC} ${COLBG1}            • CREATE VMESS USER •              ${NC} $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC} Please choose another name."
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+			read -n 1 -s -r -p "   Press any key to back on menu"
+menu
+		fi
+	done
+
+uuid=$(cat /proc/sys/kernel/random/uuid)
+read -p "   Expired : " masaaktif
+exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+sed -i '/#vmess$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
+exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
+asu=`cat<<EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "${domain}",
+      "port": "443",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "/vmess",
+      "type": "none",
+      "host": "",
+      "tls": "tls"
+}
+EOF`
+maxis=`cat<<EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "${domain}",
+      "port": "80",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "/worryfree/vmess",
+      "type": "none",
+      "host": "",
+      "tls": "none"
+}
+EOF`
+celcom=`cat<<EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "onlinepayment.celcom.com.my",
+      "port": "443",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "wss://onlinepayment.celcom.com.my/vmess",
+      "type": "none",
+      "host": "${domain}",
+      "tls": "tls",
+      "sni": "onlinepayment.celcom.com.my"
+}
+EOF`
+ask=`cat<<EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "${domain}",
+      "port": "80",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "/vmess",
+      "type": "none",
+      "host": "",
+      "tls": "none"
+}
+EOF`
+digi=`cat<<EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "162.159.134.61",
+      "port": "80",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "/vmess",
+      "type": "none",
+      "host": "${domain}",
+      "tls": "none"
+}
+EOF`
+yess=`cat<<EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "cdn.who.int",
+      "port": "80",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "ws",
+      "path": "wss://cdn.who.int/vmess",
+      "type": "none",
+      "host": "${domain}",
+      "tls": "none"
+}
+EOF`
+grpc=`cat<<EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "${domain}",
+      "port": "443",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "grpc",
+      "path": "vmess-grpc",
+      "type": "none",
+      "host": "",
+      "tls": "tls"
+}
+EOF`
+vmess_base641=$( base64 -w 0 <<< $vmess_json1)
+vmess_base642=$( base64 -w 0 <<< $vmess_json2)
+vmess_base643=$( base64 -w 0 <<< $vmess_json3)
+vmess_base644=$( base64 -w 0 <<< $vmess_json4)
+vmess_base645=$( base64 -w 0 <<< $vmess_json5)
+vmess_base646=$( base64 -w 0 <<< $vmess_json6)
+vmess_base647=$( base64 -w 0 <<< $vmess_json7)
+vmesslink1="vmess://$(echo $asu | base64 -w 0)"
+vmesslink2="vmess://$(echo $ask | base64 -w 0)"
+vmesslink3="vmess://$(echo $grpc | base64 -w 0)"
+vmesslink4="vmess://$(echo $maxis | base64 -w 0)"
+vmesslink5="vmess://$(echo $celcom | base64 -w 0)"
+vmesslink6="vmess://$(echo $digi | base64 -w 0)"
+vmesslink7="vmess://$(echo $yess | base64 -w 0)"
+
+echo "$vmesslink1" > /root/akun/vmess/vmesswstls-$user.txt
+echo "$vmesslink2" > /root/akun/vmess/vmesswsnontls-$user.txt
+echo "$vmesslink3" > /root/akun/vmess/vmessgrpc-$user.txt
+echo "$vmesslink4" > /root/akun/vmess/vmessworry-$user.txt
+
+
+systemctl restart xray > /dev/null 2>&1
+service cron restart > /dev/null 2>&1
+
+cat > /home/vps/public_html/vmess-$user.txt <<-END
+=======================
+INFO        SSH Account
+=======================
+Remarks    : $user
+id         : $uuid
+Expired On : $exp
+=======================
+Domain     : $domain
+PORT TLS   : $tls
+PORT NTLS  : $none
+PORT GRPC  : $tls
+AlterID    : 0
+Security   : Auto
+Nerwork    : ws
+Path       : /vmess
+ServicName : vmess-grpc
+=======================
+TLS : $vmesslink1
+=======================
+None TLS : $vmesslink2
+=======================
+GRPC : $vmesslink3
+=======================
+Worryfree : $vmesslink4
+=======================
+END
+TEXT="
+<code>────────────────────</code>
+<code>INFO        VMESS Account</code>
+<code>────────────────────</code>
+<code>Remarks    : $user</code>
+<code>id         : $uuid</code>
+<code>Expired On : $exp</code>
+<code>────────────────────</code>
+<code>Domain     : $domain</code>
+<code>PORT TLS   : $tls</code>
+<code>PORT NTLS  : $none</code>
+<code>PORT GRPC  : $tls</code>
+<code>AlterID    : 0</code>
+<code>Security   : Auto</code>
+<code>Nerwork    : ws</code>
+<code>Path       : /vmess</code>
+<code>ServicName : vmess-grpc</code>
+<code>────────────────────</code>
+<code>🔮 Details INFO :</code>
+http://${domain}:81/vmess-$user.txt
+<code>️📅 Expired On : $exp</code>
+<code>──────────────────────────</code>
+<i>Notifikasi Via DeadrzBOT</i>
+<b>Tele : @ProjectDedi_bot</b>
+"
+TRX="
+<code>INFO MASKU -Transaksi</code>
+<code>────────────────────</code>
+<b>  ⚠️TRANSAKSI   VMESS⚠️      </b>
+<code>────────────────────</code>
+<code>🌟Owner   : $OWNER</code>
+<code>🌟Detail  : $AKUN</code>
+<code>🌟Expired : $exp</code>
+<code>🌟Server  : $domain</code>
+<code>────────────────────</code>
+<i>Notifikasi Via DeadrzBOT</i>
+<b>Tele : @ProjectDedi_bot</b>
+"
+curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL
+clear
+curl -s --max-time $TIMES -d "chat_id=$CHATIDGC&disable_web_page_preview=1&text=$TRX&parse_mode=html" $URL
+clear
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${COLBG1}            • CREATE VMESS USER •              ${NC} $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Remarks       : ${user}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Expired On    : $exp"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Domain        : ${domain}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Port TLS      : ${tls}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Port none TLS : ${none}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Port  GRPC    : ${tls}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} id            : ${uuid}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} alterId       : 0"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Security      : auto"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Network       : ws"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Path          : /vmess" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ServiceName   : vmess-grpc"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Link TLS : " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${vmesslink1}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Link none TLS : " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${vmesslink2}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Link GRPC : " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${vmesslink3}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Link Worry : " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${vmesslink4}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1────────────────────── BY ───────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo "" | tee -a /etc/log-create-user.log
+
+#read -n 1 -s -r -p "   Press any key to back on menu" | tee -a /etc/log-create-user.log
+#menu-vmess

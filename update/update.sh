@@ -30,6 +30,7 @@ wget -q -O /usr/bin/mspeed "https://raw.githubusercontent.com/ndhet/MULTI-PORT/m
 wget -q -O /usr/bin/mbandwith "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/menu-bandwith.sh" && chmod +x /usr/bin/mbandwith
 wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/add-tr" && chmod +x /usr/bin/add-tr
 wget -q -O /usr/bin/add-ssh "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/add-ssh" && chmod +x /usr/bin/add-ssh
+wget -q -O /usr/bin/add-vmess "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/add-vmess" && chmod +x /usr/bin/add-vmess
 wget -q -O /usr/bin/update "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/update.sh" && chmod +x /usr/bin/update
 echo -e " [INFO] Update Successfully"
 sleep 2
