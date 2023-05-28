@@ -239,8 +239,10 @@ echo -e "  ${COLOR1}[04]${NC} • TROJAN  [${YELLOW}${status_xray}${NC}]   ${COL
 echo -e "  ${COLOR1}[05]${NC} • SS WS   [${YELLOW}ON${NC}]   ${COLOR1}[11]${NC} • SETTINGS [${YELLOW}Menu${NC}]  $COLOR1 $NC"
 echo -e "  ${COLOR1}[06]${NC} • SET DNS [${YELLOW}Menu${NC}] ${COLOR1}[12]${NC} • INFO     [${YELLOW}Menu${NC}]  $COLOR1 $NC"
 if [ "$Isadmin" = "ON" ]; then
-echo -e "  ${COLOR1}[13]${NC} • REG IP  [${YELLOW}Menu${NC}] ${COLOR1}[14]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1 $NC"
-echo -e "  ${COLOR1}[15]${NC} • EXIT "
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "  ${COLOR1}[IP]${NC} • REG IP  [${YELLOW}Menu${NC}] ${COLOR1}[BOT]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "  ${COLOR1}[0]${NC} • EXIT "
 ressee="menu-ip"
 bottt="menu-bot"
 else
@@ -280,7 +282,7 @@ echo -e "$COLOR1 $NC Client Name : $Name"
 echo -e "$COLOR1 $NC License     : $certificate days"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
 echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
-echo -e "$COLOR1 ${NC}            • HAYOSIASTORE •                 $COLOR1 $NC"
+echo -e "$COLOR1 ${NC}                • HAYOSIASTORE •                 $COLOR1 $NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -ne " Select menu : "; read opt
@@ -297,9 +299,9 @@ case $opt in
 10) clear ; crtxray ;;
 11) clear ; menu-set ;;
 12) clear ; info ;;
-13) clear ; $ressee ;;
-14) clear ; $bottt ;;
-15) clear ; exit ;;
+IP) clear ; $ressee ;;
+BOT) clear ; $bottt ;;
+0) clear ; exit ;;
 100) clear ; $up2u ;;
 00 | 0) clear ; menu ;;
 *) clear ; menu ;;
