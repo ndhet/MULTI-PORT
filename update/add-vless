@@ -1,0 +1,157 @@
+
+#!/bin/bash
+###########- BOT TELE ################
+AKUN="AKUN VLESS"
+TIMES="10"
+CHATID="5627481033"
+CHATIDGC="-1001971246553"
+KEY="5684804886:AAFup0F9eqNPL7yIUUmTPE5is2SaAIYZixQ"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+##################### END BOT TELE ###############
+clear
+OWNER="WEBSSH"
+domain=$(cat /etc/xray/domain)
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC} ${COLBG1}            • CREATE VLESS USER •              ${NC} $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+tls="$(cat ~/log-install.txt | grep -w "Vless TLS" | cut -d: -f2|sed 's/ //g')"
+none="$(cat ~/log-install.txt | grep -w "Vless None TLS" | cut -d: -f2|sed 's/ //g')"
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
+		read -rp "  Input Username : " -e user
+        if [ -z $user ]; then
+echo -e "$COLOR1 ${NC} [Error] Username cannot be empty "
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayosiaStore •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo ""
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu
+fi
+		CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+
+if [[ ${CLIENT_EXISTS} == '1' ]]; then
+echo -e "$COLOR1 ${NC} Please choose another name."
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1 ${NC}                • HayosiaStore •                 $COLOR1 $NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo ""
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu
+fi
+done
+
+uuid=$(cat /proc/sys/kernel/random/uuid)
+read -p "  Expired (days): " masaaktif
+exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+sed -i '/#vless$/a\#& '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#vlessgrpc$/a\#& '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+vlesslink1="vless://${uuid}@${domain}:$tls?path=/vlessws&security=tls&encryption=none&type=ws#${user}"
+vlesslink2="vless://${uuid}@${domain}:$none?path=/vlessws&encryption=none&type=ws#${user}"
+vlesslink3="vless://${uuid}@${domain}:$tls?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=bug.com#${user}"
+
+systemctl restart xray
+
+cat > /home/vps/public_html/vless-$user.txt <<-END
+=======================
+INFO      VLESS Account
+=======================
+Remarks    : $user
+id         : $uuid
+Expired On : $exp
+=======================
+Domain     : $domain
+PORT TLS   : $tls
+PORT NTLS  : $none
+PORT GRPC  : $tls
+AlterID    : 0
+Security   : Auto
+Nerwork    : ws
+Path       : /vless
+ServicName : vless-grpc
+=======================
+TLS : $vlesslink1
+=======================
+None TLS : $vlesslink2
+=======================
+GRPC : $vlesslink3
+=======================
+END
+
+TEXT="
+<code>────────────────────</code>
+<code>INFO        VLESS Account</code>
+<code>────────────────────</code>
+<code>Remarks    : $user</code>
+<code>id         : $uuid</code>
+<code>Expired On : $exp</code>
+<code>────────────────────</code>
+<code>Domain     : $domain</code>
+<code>PORT TLS   : $tls</code>
+<code>PORT NTLS  : $none</code>
+<code>PORT GRPC  : $tls</code>
+<code>AlterID    : 0</code>
+<code>Security   : Auto</code>
+<code>Nerwork    : ws</code>
+<code>Path       : /vless</code>
+<code>ServicName : vless-grpc</code>
+<code>────────────────────</code>
+<code>🔮 Details INFO :</code>
+http://${domain}:81/vless-$user.txt
+<code>️📅 Expired On : $exp</code>
+<code>──────────────────────────</code>
+<i>Notifikasi Via DeadrzBOT</i>
+<b>Tele : @ProjectDedi_bot</b>
+"
+TRX="
+<code>INFO MASKU -Transaksi</code>
+<code>────────────────────</code>
+<b>  ⚠️TRANSAKSI   VLESS⚠️      </b>
+<code>────────────────────</code>
+<code>🌟Owner   : $OWNER</code>
+<code>🌟Detail  : $AKUN</code>
+<code>🌟Expired : $exp</code>
+<code>🌟Server  : $domain</code>
+<code>────────────────────</code>
+<i>Notifikasi Via DeadrzBOT</i>
+<b>Tele : @ProjectDedi_bot</b>
+"
+curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL
+clear
+curl -s --max-time $TIMES -d "chat_id=$CHATIDGC&disable_web_page_preview=1&text=$TRX&parse_mode=html" $URL
+clear
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${COLBG1}            • CREATE VLESS USER •              ${NC} $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Remarks       : ${user}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Expired On    : $exp"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Domain        : ${domain}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} port TLS      : $tls"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} port none TLS : $none"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} id            : ${uuid}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Encryption    : none"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Network       : ws"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Path          : /vless" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Path          : vless-grpc"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Link TLS :" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${vlesslink1}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC}"   
+echo -e "$COLOR1 ${NC} Link none TLS : " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${vlesslink2}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} Link GRPC : " | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC} ${vlesslink3}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1────────────────────── BY ───────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 ${NC}                • HayoSia Store •                 $COLOR1 $NC" | tee -a /etc/log-create-user.log
+echo -e "$COLOR1─────────────────────────────────────────────────${NC}" | tee -a /etc/log-create-user.log
+echo ""  | tee -a /etc/log-create-user.log
+read -n 1 -s -r -p "   Press any key to back on menu" | tee -a /etc/log-create-user.log
+menu-vless
