@@ -475,7 +475,7 @@ echo -e ""
 read -p " Select menu :  "  opt
 echo -e ""
 case $opt in
-01 | 1) clear ; addvmess ;;
+01 | 1) clear ; add-vmess ;;
 02 | 2) clear ; renewvmess ;;
 03 | 3) clear ; delvmess ;;
 04 | 4) clear ; cekvmess ;;

@@ -341,7 +341,7 @@ echo -e ""
 read -p " Select menu :  "  opt
 echo -e ""
 case $opt in
-01 | 1) clear ; addvless ;;
+01 | 1) clear ; add-vless ;;
 02 | 2) clear ; renewvless ;;
 03 | 3) clear ; delvless ;;
 04 | 4) clear ; cekvless ;;
