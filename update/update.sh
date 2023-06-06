@@ -34,6 +34,7 @@ wget -q -O /usr/bin/add-vmess "https://raw.githubusercontent.com/ndhet/MULTI-POR
 wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/add-vless" && chmod +x /usr/bin/add-vless
 wget -q -O /usr/bin/add-ss "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/add-ss" && chmod +x /usr/bin/add-ss
 wget -q -O /usr/bin/update "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/update.sh" && chmod +x /usr/bin/update
+wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/xp.sh" && chmod +x /usr/bin/xp
 echo -e " [INFO] Update Successfully"
 sleep 2
 exit

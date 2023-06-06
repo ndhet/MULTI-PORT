@@ -3,7 +3,7 @@
 AKUN="AKUN VMESS"
 TIMES="10"
 CHATID="5627481033"
-CHATIDGC="-1001971246553"
+CHATIDGC="-958733342"
 KEY="5684804886:AAFup0F9eqNPL7yIUUmTPE5is2SaAIYZixQ"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 ##################### END BOT TELE ###############

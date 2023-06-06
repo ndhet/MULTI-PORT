@@ -242,7 +242,7 @@ echo -e "$COLOR1└────────────────────�
 if [ "$Isadmin" = "ON" ]; then
 echo -e "$COLOR1┌────────────────── MENU ADMIN ───────────────────┐${NC}"
 echo -e "  ${COLOR1}[IP]${NC} • REG IP  [${YELLOW}Menu${NC}] ${COLOR1}[BOT]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1 $NC"
-echo -e "  ${COLOR1}[00]${NC} • EXIT "
+echo -e "  ${COLOR1}[00]${NC} • EXIT  ${COLOR1}[C]${NC} • CLEAR EXPIRED"
 ressee="menu-ip"
 bottt="menu-bot"
 else
@@ -302,6 +302,7 @@ case $opt in
 IP) clear ; $ressee ;;
 BOT) clear ; $bottt ;;
 0) clear ; exit ;;
+C) clear; xp;;
 100) clear ; $up2u ;;
 00 | 0) clear ; menu ;;
 *) clear ; menu ;;
