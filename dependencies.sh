@@ -23,6 +23,7 @@ echo "Progress..."
 sleep 2
 
 apt update -y
+apt install python -y
 apt update -y
 apt dist-upgrade -y
 apt install sudo -y

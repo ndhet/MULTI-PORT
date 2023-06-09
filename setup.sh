@@ -201,6 +201,10 @@ echo -e "$green[INFO]$NC Install SSH & OpenVPN!"
 sleep 2
 clear
 wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+echo -e "$green[INFO]$NC Install SlowDNS!"
+sleep 2
+clear
+wget https://raw.githubusercontent.com/MULTI-PORT/main/ssh/install-sldns && chmod +x install-sldns && ./install-sldns
 #Instal Xray
 echo -e "$green[INFO]$NC Install Install XRAY!"
 sleep 2

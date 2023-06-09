@@ -13,9 +13,9 @@ ver=$VERSION_ID
 #detail nama perusahaan
 country=ID
 state=INDONESIA
-locality=JAWATENGAH
-organization=Blogger
-organizationalunit=Blogger
+locality=BANTRN
+organization=SSHAXOR
+organizationalunit=SSHAXOR
 commonname=none
 email=admin@sedang.my.id
 
