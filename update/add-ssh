@@ -80,7 +80,8 @@ ssl="$(cat ~/log-install.txt | grep -w "Stunnel4" | cut -d: -f2)"
 sqd="$(cat ~/log-install.txt | grep -w "Squid" | cut -d: -f2)"
 ovpn="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 ovpn2="$(netstat -nlpu | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-
+dnsdomain=$(cat /etc/xray/dns)
+dnskey=$(cat /etc/slowdns/server.pub)
 OhpSSH=`cat /root/log-install.txt | grep -w "OHP SSH" | cut -d: -f2 | awk '{print $1}'`
 OhpDB=`cat /root/log-install.txt | grep -w "OHP DBear" | cut -d: -f2 | awk '{print $1}'`
 OhpOVPN=`cat /root/log-install.txt | grep -w "OHP OpenVPN" | cut -d: -f2 | awk '{print $1}'`
@@ -106,7 +107,7 @@ OpenSSH    : $opensh
 Dropbear   : $db
 SSH-WS     : $portsshws
 SSH-SSL-WS : $wsssl
-SSL/TLS    :$ssl
+SSL/TLS    : $ssl
 UDPGW      : 7100-7300
 =======================
 GET wss://BUG/ HTTP/1.1[crlf]Host: $domen [crlf]Upgrade: websocket[crlf][crlf]
@@ -138,7 +139,7 @@ TEXT="
 <code>Dropbear   : $db</code>
 <code>SSH-WS     : $portsshws</code>
 <code>SSH-SSL-WS : $wsssl</code>
-<code>SSL/TLS    :$ssl</code>
+<code>SSL/TLS    : $ssl</code>
 <code>UDPGW      : 7100-7300</code>
 <code>────────────────────</code>
 <code>PADYLOAD : </code><code>GET wss://BUG/ HTTP/1.1[crlf]Host: $domen [crlf]Upgrade: websocket[crlf][crlf]</code>
@@ -172,6 +173,8 @@ echo -e "$COLOR1 $NC  Dropbear   : $db"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSH-WS     : $portsshws"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSH-SSL-WS : $wsssl"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSL/TLS    :$ssl"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  NS Slowdns : $dnsdomain"
+echo -e "$COLOR1 $NC  DNS PubKey : $dnskey" 
 echo -e "$COLOR1 $NC  UDPGW      : 7100-7300"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
