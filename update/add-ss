@@ -281,10 +281,11 @@ cat > /home/vps/public_html/ss-ws/ss-$user.txt <<-END
   "stats": {}
 }
 END
+
 systemctl restart xray > /dev/null 2>&1
 service cron restart > /dev/null 2>&1
 
-cat > /home/vps/public_html/vless-$user.txt <<-END
+cat > /home/vps/public_html/ss-$user.txt <<-END
 =======================
 INFO      VLESS Account
 =======================
