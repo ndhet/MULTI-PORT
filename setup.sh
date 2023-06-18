@@ -151,7 +151,35 @@ echo ""
 wget -q https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
 rm dependencies.sh
 clear
+apt install lolcat -y
+echo -e "════════════════════════════════════════" | lolcat
+echo -e "█████████" | lolcat
+echo -e "█▄█████▄█╔╦╗╔═╦╗╔══╗╔═╗╔═╗╔═╗─╔╗╔═╗╔═╗╔══╗" | lolcat
+echo -e "█▼▼▼▼▼   ║╔╝╚╗║║╚╗╔╝║╬║║╬║║║║─║║║╦╝║╔╝╚╗╔╝ " | lolcat
+echo -e "█.       ║╚╗╔╩╗║─║║─║╔╝║╗╣║║║╔╣║║╩╗║╚╗─║║─ " | lolcat
+echo -e "█▲▲▲▲▲   ╚╩╝╚══╝─╚╝─╚╝─╚╩╝╚═╝╚═╝╚═╝╚═╝─╚╝─ " | lolcat
+echo -e "█████████ " | lolcat
+echo -e " ██ ██ " | lolcat
+echo -e "════════════════════════════════════════" | lolcat
+echo -e "            [Free Internet]" | lolcat
+echo -e "════════════════════════════════════════" | lolcat
+echo -e "${red}    ♦️${NC} ${green} CUSTOM SETUP DOMAIN VPS     ${NC}"
+echo -e "${red}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+echo "1. Use Domain From Script / Gunakan Domain Dari Script"
+echo "2. Choose Your Own Domain / Pilih Domain Sendiri"
+echo -e "${red}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+read -rp "Choose Your Domain Installation : " dom 
 
+if test $dom -eq 1; then
+clear
+apt install jq curl -y
+
+echo -e "$green[INFO]$NC Install SlowDNS!"
+sleep 2
+clear
+wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/install-sldns && chmod +x install-sldns && ./install-sldns
+
+elif test $dom -eq 2; then
 yellow "Add Domain for vmess/vless/trojan dll"
 echo " "
 read -rp "Input ur domain : " -e pp
@@ -160,6 +188,22 @@ echo "$pp" > /root/scdomain
 echo "$pp" > /etc/xray/domain
 echo "$pp" > /etc/xray/scdomain
 echo "IP=$pp" > /var/lib/alexxa-pro/ipvps.conf
+else 
+echo "Not Found Argument"
+exit 1
+fi
+echo -e "${GREEN}Done!${NC}"
+sleep 2
+clear
+
+#yellow "Add Domain for vmess/vless/trojan dll"
+#echo " "
+#read -rp "Input ur domain : " -e pp
+#echo "$pp" > /root/domain
+#echo "$pp" > /root/scdomain
+#echo "$pp" > /etc/xray/domain
+#echo "$pp" > /etc/xray/scdomain
+#echo "IP=$pp" > /var/lib/alexxa-pro/ipvps.conf
 
 #THEME RED
 cat <<EOF>> /etc/alexxa/theme/red
@@ -201,10 +245,6 @@ echo -e "$green[INFO]$NC Install SSH & OpenVPN!"
 sleep 2
 clear
 wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
-echo -e "$green[INFO]$NC Install SlowDNS!"
-sleep 2
-clear
-wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/install-sldns && chmod +x install-sldns && ./install-sldns
 #Instal Xray
 echo -e "$green[INFO]$NC Install Install XRAY!"
 sleep 2
@@ -219,6 +259,9 @@ echo -e "$green[INFO]$NC Download Extra Menu"
 sleep 2
 wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/update.sh && chmod +x update.sh && ./update.sh
 clear
+echo -e "$green[INFO]$NC Install UDP CUSTOM"
+sleep 2
+wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/set.sh" -O set.sh && chmod +x set.sh && ./set.sh
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 

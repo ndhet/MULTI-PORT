@@ -10,9 +10,9 @@ rm nsdomain
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-x0-9 | head -c5)
 
-DOMAIN=kudurumasa.my.id
-SUB_DOMAIN=onichan-${sub}.kudurumasa.my.id
-NS_DOMAIN=slowdns-${subsl}.kudurumasa.my.id
+DOMAIN=det.my.id
+SUB_DOMAIN=onichan-${sub}.det.my.id
+NS_DOMAIN=slowdns-${subsl}.det.my.id
 
 CF_ID=dedideadrz@gmail.com
 CF_KEY=f2c829a7cc6efee3c2b4091a9190cce9fcb52
@@ -71,3 +71,8 @@ echo "Host : $SUB_DOMAIN"
 echo $SUB_DOMAIN > /root/subdomain
 echo "Host NS : $NS_DOMAIN"
 echo $NS_DOMAIN > /root/nsdomain
+echo $SUB_DOMAIN > /root/domain
+echo $SUB_DOMAIN > /root/scdomain
+echo $SUB_DOMAIN > /etc/xray/domain
+echo $SUB_DOMAIN > /etc/xray/scdomain
+echo "IP=$SUB_DOMAIN" > /var/lib/alexxa-pro/ipvps.conf

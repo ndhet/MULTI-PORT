@@ -107,6 +107,7 @@ OpenSSH    : $opensh
 Dropbear   : $db
 SSH-WS     : $portsshws
 SSH-SSL-WS : $wsssl
+UDP-Custom : 1-65535
 SSL/TLS    : $ssl
 NS Slowdns : $dnsdomain
 DNS PubKey : $dnskey
@@ -141,6 +142,7 @@ TEXT="
 <code>Dropbear   : $db</code>
 <code>SSH-WS     : $portsshws</code>
 <code>SSH-SSL-WS : $wsssl</code>
+<code>UDP-Custom : 1-65535</code>
 <code>SSL/TLS    : $ssl</code>
 <code>UDPGW      : 7100-7300</code>
 <code>────────────────────</code>
