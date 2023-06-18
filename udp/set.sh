@@ -24,7 +24,7 @@ sudo apt install -y curl
 sudo apt install -y dos2unix
 sudo apt install -y neofetch
 
-source <(curl -sSL 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/module/module')
+source <(curl -sSL 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/module/module')
 
 time_reboot() {
   print_center -ama "${a92:-System/Server Reboot In} $1 ${a93:-Seconds}"
@@ -77,28 +77,28 @@ else
   # systemctl stop udp-request &>/dev/null
 
  # [+get files ⇣⇣⇣+]
-  source <(curl -sSL 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/module/module') &>/dev/null
-  wget -O /etc/UDPCustom/module 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/module/module' &>/dev/null
+  source <(curl -sSL 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/module/module') &>/dev/null
+  wget -O /etc/UDPCustom/module 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/module/module' &>/dev/null
   chmod +x /etc/UDPCustom/module
 
-  wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/bin/udp-custom-linux-amd64" -O /root/udp/udp-custom &>/dev/null
-  # wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/bin/udp-request-linux-amd64" -O /usr/bin/udp-request &>/dev/null
+  wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/bin/udp-custom-linux-amd64" -O /root/udp/udp-custom &>/dev/null
+  # wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/bin/udp-request-linux-amd64" -O /usr/bin/udp-request &>/dev/null
   chmod +x /root/udp/udp-custom
   # chmod +x /usr/bin/udp-request
 
-  wget -O /etc/limiter.sh 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/module/limiter.sh'
+  wget -O /etc/limiter.sh 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/module/limiter.sh'
   cp /etc/limiter.sh /etc/UDPCustom
   chmod +x /etc/limiter.sh
   chmod +x /etc/UDPCustom
   
   # [+udpgw+]
-  wget -O /etc/udpgw 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/module/udpgw'
+  wget -O /etc/udpgw 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/module/udpgw'
   mv /etc/udpgw /bin
   chmod +x /bin/udpgw
 
   # [+service+]
-  wget -O /etc/udpgw.service 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/config/udpgw.service'
-  wget -O /etc/udp-custom.service 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/config/udp-custom.service'
+  wget -O /etc/udpgw.service 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/config/udpgw.service'
+  wget -O /etc/udp-custom.service 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/config/udp-custom.service'
   
   mv /etc/udpgw.service /etc/systemd/system
   mv /etc/udp-custom.service /etc/systemd/system
@@ -113,11 +113,11 @@ else
   systemctl start udp-custom &>/dev/null
 
   # [+config+]
-  wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/config/config.json" -O /root/udp/config.json &>/dev/null
+  wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/config/config.json" -O /root/udp/config.json &>/dev/null
   chmod +x /root/udp/config.json
 
   # [+menu+]
-  wget -O /usr/bin/udp 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/module/udp' 
+  wget -O /usr/bin/udp 'https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/module/udp' 
   chmod +x /usr/bin/udp
   ufw disable &>/dev/null
   sudo apt-get remove --purge ufw firewalld -y

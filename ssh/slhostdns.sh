@@ -11,7 +11,7 @@ sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-x0-9 | head -c5)
 
 DOMAIN=det.my.id
-SUB_DOMAIN=onichan-${sub}.det.my.id
+SUB_DOMAIN=${sub}.det.my.id
 NS_DOMAIN=slowdns-${subsl}.det.my.id
 
 CF_ID=dedideadrz@gmail.com
