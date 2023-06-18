@@ -177,8 +177,9 @@ echo -e "$COLOR1 $NC  Dropbear   : $db"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSH-WS     : $portsshws"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSH-SSL-WS : $wsssl"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSL/TLS    :$ssl"  | tee -a /etc/log-create-user.log
-echo -e "$COLOR1 $NC  NS Slowdns : $dnsdomain"
-echo -e "$COLOR1 $NC  DNS PubKey : $dnskey" 
+echo -e "$COLOR1 $NC  UDP-CUSTOM : 1-65535"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  NS Slowdns : $dnsdomain"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  DNS PubKey : $dnskey" | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  UDPGW      : 7100-7300"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
@@ -204,6 +205,7 @@ echo -e "$COLOR1 $NC  Dropbear   : $db"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSH-WS     : $portsshws"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSH-SSL-WS : $wsssl"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  SSL/TLS    :$ssl"  | tee -a /etc/log-create-user.log
+echo -e "$COLOR1 $NC  UDP-CUSTOM : 1-65535"  | tee -a /etc/log-create-user.log
 echo -e "$COLOR1 $NC  NS Slowdns : $dnsdomain"
 echo -e "$COLOR1 $NC  DNS PubKey : $dnskey" 
 echo -e "$COLOR1 $NC  UDPGW      : 7100-7300"  | tee -a /etc/log-create-user.log
