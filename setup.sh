@@ -172,7 +172,6 @@ read -rp "Choose Your Domain Installation : " dom
 
 if test $dom -eq 1; then
 clear
-apt install jq curl -y
 
 echo -e "$green[INFO]$NC Install SlowDNS!"
 sleep 2
