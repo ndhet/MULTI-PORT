@@ -35,6 +35,7 @@ time_reboot() {
     sleep 1
     : $((REBOOT_TIMEOUT--))
   done
+  rm /home/ubuntu/install.sh
   echo -e "\033[01;31m\033[1;33m More Updates, Follow Us On \033[1;31m(\033[1;36mTelegram\033[1;31m): \033[1;37m@voltssh\033[0m"
   reboot
 }
@@ -46,7 +47,7 @@ if [ "$(lsb_release -rs)" = "8*|9*|10*|11*|16.04*|18.04*" ]; then
   print_center -ama -e "\e[1m\e[33m${a94:-this script is not compatible with your operating system}\e[0m"
   print_center -ama -e "\e[1m\e[33m ${a95:-Use Ubuntu 20 or higher}\e[0m"
   print_center -ama -e "\e[1m\e[31m=====================================================\e[0m"
-  rm /root/install.sh
+  rm /home/ubuntu/install.sh
   exit 1
 else
   clear
@@ -58,8 +59,8 @@ else
     # [change timezone to UTC +0]
   echo ""
   echo " ⇢ Change timezone to UTC +0"
-  echo " ⇢ for Asia/Jakarta [GH] GMT +00:00"
-  ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+  echo " ⇢ for Africa/Accra [GH] GMT +00:00"
+  ln -fs /usr/share/zoneinfo/Africa/Accra /etc/localtime
   sleep 3
 
   # [+clean up+]
@@ -123,4 +124,12 @@ else
   sudo apt-get remove --purge ufw firewalld -y
   apt remove netfilter-persistent -y
   clear
+  echo ""
+  echo ""
+  print_center -ama "${a103:-setting up, please wait...}"
+  sleep 3
+  title "${a102:-Installation Successful}"
+  print_center -ama "${a103:-  To show menu type: \nudp\n}"
+  msg -bar
+  time_reboot 5
 fi
