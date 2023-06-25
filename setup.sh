@@ -258,9 +258,6 @@ echo -e "$green[INFO]$NC Download Extra Menu"
 sleep 2
 wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/update.sh && chmod +x update.sh && ./update.sh
 clear
-echo -e "$green[INFO]$NC Install UDP CUSTOM"
-sleep 2
-wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/set.sh" -O set.sh && chmod +x set.sh && ./set.sh
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
@@ -352,10 +349,13 @@ rm /root/update.sh
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a log-install.txt
 echo -e "
 "
-echo -ne "[ ${yell}WARNING${NC} ] Do you want to reboot now ? (y/n)? "
+echo -ne "[ ${yell}WARNING${NC} ] Do you want to install UDP  ? (y/n)? "
 read answer
-if [ "$answer" == "${answer#[Yy]}" ] ;then
-exit 0
+if [ "$answer" == "y" ] ;then
+clear
+echo -e "$green[INFO]$NC Install UDP CUSTOM"
+sleep 2
+wget "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/udp/set.sh" -O set.sh && chmod +x set.sh && ./set.sh
 else
 reboot
 fi
