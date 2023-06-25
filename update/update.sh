@@ -4,11 +4,6 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 ###########- COLOR CODE -##############
 echo -e " [INFO] Downloading Update File"
 sleep 2
-mkdir ~/akun
-mkdir ~/akun/tr
-mkdir ~/akun/vmess
-mkdir ~/akun/vless
-mkdir ~/akun/ss
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/menu.sh" && chmod +x /usr/bin/menu
 wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/menu-ss.sh" && chmod +x /usr/bin/menu-ss
 wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/menu-vmess.sh" && chmod +x /usr/bin/menu-vmess
@@ -35,6 +30,7 @@ wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/ndhet/MULTI-POR
 wget -q -O /usr/bin/add-ss "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/add-ss" && chmod +x /usr/bin/add-ss
 wget -q -O /usr/bin/update "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/update/update.sh" && chmod +x /usr/bin/update
 wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/xp.sh" && chmod +x /usr/bin/xp
+wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/tendang.sh" && chmod +x /usr/bin/tendang
 echo -e " [INFO] Update Successfully"
 sleep 2
 exit
