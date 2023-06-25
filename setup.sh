@@ -176,17 +176,25 @@ clear
 echo -e "$green[INFO]$NC Install SlowDNS!"
 sleep 2
 clear
-wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/install-sldns && chmod +x install-sldns && ./install-sldns
+rm -rf slhostdns.sh
 
+wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/slhostdns.sh && chmod +x slhostdns.sh && ./slhostdns.sh
+
+wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/install-sldns && chmod +x install-sldns && ./install-sldns
 elif test $dom -eq 2; then
 yellow "Add Domain for vmess/vless/trojan dll"
 echo " "
 read -rp "Input ur domain : " -e pp
+read -rp "Input ur NS DOMAIN : " -e nsdomain
+echo "$pp" > /root/subdomain
+echo "$nsdomain"> /root/nsdomain
 echo "$pp" > /root/domain
 echo "$pp" > /root/scdomain
 echo "$pp" > /etc/xray/domain
 echo "$pp" > /etc/xray/scdomain
 echo "IP=$pp" > /var/lib/alexxa-pro/ipvps.conf
+clear
+wget https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/install-sldns && chmod +x install-sldns && ./install-sldns
 else 
 echo "Not Found Argument"
 exit 1
@@ -347,10 +355,9 @@ rm /root/setup.sh >/dev/null 2>&1
 rm /root/insshws.sh 
 rm /root/update.sh
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a log-install.txt
-echo -e "
-"
-echo -ne "[ ${yell}WARNING${NC} ] Do you want to install UDP  ? (y/n)? "
-read answer
+echo -e ""
+clear
+read -p "[ ${yell}WARNING${NC} ] Do you want to install UDP ? " answer
 if [ "$answer" == "y" ] ;then
 clear
 echo -e "$green[INFO]$NC Install UDP CUSTOM"
