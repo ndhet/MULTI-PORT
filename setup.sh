@@ -152,6 +152,7 @@ wget -q https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/dependencies.sh;
 rm dependencies.sh
 clear
 apt install lolcat -y
+clear
 echo -e "════════════════════════════════════════" | lolcat
 echo -e "█████████" | lolcat
 echo -e "█▄█████▄█╔╦╗╔═╦╗╔══╗╔═╗╔═╗╔═╗─╔╗╔═╗╔═╗╔══╗" | lolcat
@@ -357,7 +358,7 @@ rm /root/update.sh
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a log-install.txt
 echo -e ""
 clear
-read -p "[ ${yell}WARNING${NC} ] Do you want to install UDP ? " answer
+read -p "$yell[WARNING]$NC Do you want to install UDP ? " answer
 if [ "$answer" == "y" ] ;then
 clear
 echo -e "$green[INFO]$NC Install UDP CUSTOM"
