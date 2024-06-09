@@ -287,7 +287,7 @@ service cron restart > /dev/null 2>&1
 
 cat > /home/vps/public_html/ss-$user.txt <<-END
 =======================
-INFO      VLESS Account
+INFO      SSWS Account
 =======================
 Remarks    : $user
 Password   : $uuid
