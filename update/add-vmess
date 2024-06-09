@@ -189,7 +189,7 @@ service cron restart > /dev/null 2>&1
 
 cat > /home/vps/public_html/vmess-$user.txt <<-END
 =======================
-INFO        SSH Account
+INFO        VMESS Account
 =======================
 Remarks    : $user
 id         : $uuid
