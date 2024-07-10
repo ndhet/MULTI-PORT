@@ -135,16 +135,15 @@ rm /etc/nginx/conf.d/vps.conf
 cat >/etc/nginx/conf.d/xray.conf <<EOF
 server {
   listen 81;
-  server_name  $domain;
+  server_name $domain;
   listen 443;
-  listen [::]:443;
   ssl_certificate /etc/xray/xray.crt;
   ssl_certificate_key /etc/xray/xray.key;
   ssl_ciphers EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+ECDSA+AES128:EECDH+aRSA+AES128:RSA+AES128:EECDH+ECDSA+AES256:EECDH+aRSA+AES256:RSA+AES256:EECDH+ECDSA+3DES:EECDH+aRSA+3DES:RSA+3DES:!MD5;
   ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
   access_log /var/log/nginx/vps-access.log;
   error_log /var/log/nginx/vps-error.log error;
-  root   /home/vps/public_html;
+  root /home/vps/public_html;
 
   location / {
     index  index.html index.htm index.php;
