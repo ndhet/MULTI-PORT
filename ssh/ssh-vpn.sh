@@ -148,7 +148,7 @@ server {
 
   location / {
     index  index.html index.htm index.php;
-    try_files $uri $uri/ /index.php?$args;
+    try_files  / /index.php?;
     add_header 'Access-Control-Allow-Origin' '*';
     add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
     add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type';
@@ -158,7 +158,7 @@ server {
     include /etc/nginx/fastcgi_params;
     fastcgi_pass  127.0.0.1:9000;
     fastcgi_index index.php;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_param SCRIPT_FILENAME ;
   }
 }
 EOF
