@@ -158,10 +158,12 @@ server {
     include /etc/nginx/fastcgi_params;
     fastcgi_pass  127.0.0.1:9000;
     fastcgi_index index.php;
-    fastcgi_param SCRIPT_FILENAME ;
-  }
-}
+    
 EOF
+sed -i '$ ifastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;' /etc/nginx/conf.d/vps.conf
+sed -i '$ i } ' /etc/nginx/conf.d/vps.conf
+sed -i '$ i } ' /etc/nginx/conf.d/vps.conf
+
 /etc/init.d/nginx restart
 
 mkdir /etc/systemd/system/nginx.service.d
