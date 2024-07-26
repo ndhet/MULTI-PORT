@@ -132,7 +132,7 @@ rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/nginx.conf"
 rm /etc/nginx/conf.d/vps.conf
 #wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/vps.conf"
-cat >/etc/nginx/conf.d/xray.conf <<EOF
+cat >/etc/nginx/conf.d/vps.conf <<EOF
 server {
   listen 81;
   server_name $domain;
