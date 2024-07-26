@@ -82,7 +82,7 @@ apt -y install wget curl
 apt-get install figlet -y
 apt-get install ruby -y
 gem install lolcat
-
+domain=$(cat /root/domain)
 # set time GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
