@@ -134,7 +134,7 @@ rm /etc/nginx/conf.d/vps.conf
 #wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/vps.conf"
 cat >/etc/nginx/conf.d/vps.conf <<EOF
 server {
-  listen 81;
+  listen       81;
   listen 443;
   listen [::]:443;
   server_name $domain;
@@ -144,7 +144,7 @@ server {
   ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
   access_log /var/log/nginx/vps-access.log;
   error_log /var/log/nginx/vps-error.log error;
-  root /home/vps/public_html;
+  root   /home/vps/public_html;
 
   location / {
     index  index.html index.htm index.php;
