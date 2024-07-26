@@ -13,11 +13,11 @@ ver=$VERSION_ID
 #detail nama perusahaan
 country=ID
 state=INDONESIA
-locality=BANTRN
+locality=BANTEN
 organization=SSHAXOR
 organizationalunit=SSHAXOR
 commonname=none
-email=admin@sedang.my.id
+email=admin@sshaxor.my.id
 
 # simple password minimal
 curl -sS https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/password | openssl aes-256-cbc -d -a -pass pass:scvps07gg -pbkdf2 > /etc/pam.d/common-password
@@ -135,8 +135,9 @@ rm /etc/nginx/conf.d/vps.conf
 cat >/etc/nginx/conf.d/vps.conf <<EOF
 server {
   listen 81;
-  server_name $domain;
   listen 443;
+  listen [::]:443;
+  server_name $domain;
   ssl_certificate /etc/xray/xray.crt;
   ssl_certificate_key /etc/xray/xray.key;
   ssl_ciphers EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+ECDSA+AES128:EECDH+aRSA+AES128:RSA+AES128:EECDH+ECDSA+AES256:EECDH+aRSA+AES256:RSA+AES256:EECDH+ECDSA+3DES:EECDH+aRSA+3DES:RSA+3DES:!MD5;
