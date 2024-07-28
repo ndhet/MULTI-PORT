@@ -134,9 +134,8 @@ rm /etc/nginx/conf.d/vps.conf
 #wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ndhet/MULTI-PORT/main/ssh/vps.conf"
 cat >/etc/nginx/conf.d/vps.conf <<EOF
 server {
-  listen       81;
-  listen 443;
-  listen [::]:443;
+  listen 81;
+  listen 443 ssl;
   server_name $domain;
   ssl_certificate /etc/xray/xray.crt;
   ssl_certificate_key /etc/xray/xray.key;
@@ -144,11 +143,11 @@ server {
   ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
   access_log /var/log/nginx/vps-access.log;
   error_log /var/log/nginx/vps-error.log error;
-  root   /home/vps/public_html;
+  root /home/vps/public_html;
 
   location / {
     index  index.html index.htm index.php;
-    try_files  / /index.php?;
+    try_files $uri $uri/ /index.php?$args;
     add_header 'Access-Control-Allow-Origin' '*';
     add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
     add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type';
@@ -160,7 +159,7 @@ server {
     fastcgi_index index.php;
     
 EOF
-sed -i '$ ifastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;' /etc/nginx/conf.d/vps.conf
+sed -i '$ i fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;' /etc/nginx/conf.d/vps.conf
 sed -i '$ i } ' /etc/nginx/conf.d/vps.conf
 sed -i '$ i } ' /etc/nginx/conf.d/vps.conf
 
