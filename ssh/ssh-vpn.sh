@@ -147,7 +147,6 @@ server {
 
   location / {
     index  index.html index.htm index.php;
-    try_files $uri $uri/ /index.php?$args;
     add_header 'Access-Control-Allow-Origin' '*';
     add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
     add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type';
